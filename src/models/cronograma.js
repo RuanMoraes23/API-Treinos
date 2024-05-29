@@ -8,7 +8,8 @@ const cronogramaSchema = new mongoose.Schema({
     dias: [{
         diaDaSemana: { type: String, required: true },
         treino: treinoSchema
-    }]
+    }],
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Referência ao usuário
 }, {versionKey: false});
 
 const cronograma = mongoose.model("cronograma", cronogramaSchema);

@@ -15,7 +15,8 @@ const controlePesoSchema = new mongoose.Schema({
                 }]
             }
         }]
-    }
+    },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Referência ao usuário
 }, { versionKey: false });
 
 const controlePeso = mongoose.model("controlePeso", controlePesoSchema);

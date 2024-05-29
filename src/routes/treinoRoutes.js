@@ -1,16 +1,22 @@
 import express from "express";
-import treinoController from "../controllers/treinoController.js";
+import TreinoController from "../controllers/treinoController.js";
+import authMiddleware from "../middlewares/authMiddleware.js"; // Importe o middleware de autenticação
 
-const routes = express.Router()
+const router = express.Router();
 
-routes.post("/treino", treinoController.cadastraTreinos);
+// Rota para cadastrar treinos
+router.post("/treinos", authMiddleware, TreinoController.cadastraTreinos);
 
-routes.get("/treino", treinoController.listaTreinos);
+// Rota para listar todos os treinos
+router.get("/treinos/:id", authMiddleware, TreinoController.listaTreinos);
 
-routes.get("/treino/:id", treinoController.listaTreino);
+// Rota para buscar um treino por ID
+router.get("/treino/:id", authMiddleware, TreinoController.listaTreino);
 
-routes.put("/treino/:id", treinoController.modificaTreino);
+// Rota para modificar um treino por ID
+router.put("/treinos/:id", authMiddleware, TreinoController.modificaTreino);
 
-routes.delete("/treino/:id", treinoController.deletarTreino);
+// Rota para deletar um treino por ID
+router.delete("/treinos/:id", authMiddleware, TreinoController.deletarTreino);
 
-export default routes;
+export default router;

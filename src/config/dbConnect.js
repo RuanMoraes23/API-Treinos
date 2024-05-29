@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function conectaBanco() {
-    mongoose.connect("mongodb+srv://ruanscaranolol:NFONFgs2bSb2bqr5@cluster0.fgpqt7z.mongodb.net/projetoTreino?retryWrites=true&w=majority&appName=Cluster0")
+    mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
 
     return mongoose.connection;
 };

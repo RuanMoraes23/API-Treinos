@@ -6,7 +6,9 @@ class cronogramaController {
 
     static async cadastraCronograma(req,res) {
         try {
+            req.body.userId = req.user._id;
             const cronogramaCompleto = req.body;
+            console.log('cronograma:',cronogramaCompleto)
             const arraydeTreinos = {...cronogramaCompleto.dias};
             for (const dia in arraydeTreinos){
                 const treinoEncontrado = await treino.findById(arraydeTreinos[dia].treino);
@@ -20,7 +22,7 @@ class cronogramaController {
     }
     static async listaCronogramas(req,res){
         try {
-            const listadeCronogramas = await cronograma.find({});
+            const listadeCronogramas = await cronograma.find({ userId: req.user._id });
             res.status(200).json({ message: "Lista de cronogramas", listadeCronogramas });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - falha ao listar cronograma`});
